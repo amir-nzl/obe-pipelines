@@ -1,4 +1,4 @@
-def call(Map config) {
+def buildMaven(Map config = [:]) {
     pipeline {
         agent any
 
@@ -10,8 +10,8 @@ def call(Map config) {
             stage('Checkout') {
                 steps {
                     // Checkout code from GitHub
-                    git url: config.gitUrl,
-                        branch: 'master',
+                    git url: config.get('gitUrl'),
+                        branch: config.get('branch', 'master'),
                         credentialsId: 'github-token'
                 }
             }
