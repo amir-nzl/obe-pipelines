@@ -1,4 +1,4 @@
-def call(String gitUrl) {
+def call(Map config) {
     pipeline {
         agent any
 
@@ -10,7 +10,7 @@ def call(String gitUrl) {
             stage('Checkout') {
                 steps {
                     // Checkout code from GitHub
-                    git url: gitUrl,
+                    git url: config.gitUrl,
                         branch: master,
                         credentialsId: 'github-token'
                 }
