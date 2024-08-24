@@ -1,4 +1,4 @@
-def call(Map config) {
+void call(Map config) {
     node {
         // Define and set parameters
         String gitBaseUrl = 'https://github.com/amir-nzl'
@@ -7,6 +7,7 @@ def call(Map config) {
 
         // Tool configuration
         String mavenTool = tool name: 'Maven 3.9.8'
+
         withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
             try {
                 stage('Checkout') {
