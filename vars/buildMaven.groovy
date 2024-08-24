@@ -11,7 +11,7 @@ def call(Map config) {
                 steps {
                     // Checkout code from GitHub
                     git url: config.gitUrl,
-                        branch: master,
+                        branch: 'master',
                         credentialsId: 'github-token'
                 }
             }
