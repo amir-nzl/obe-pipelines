@@ -14,7 +14,7 @@ def call(Map config) {
             stage('Checkout') {
                 steps {
                     // Checkout code from GitHub
-                    git url: "${params.GIT_BASE_URL}/config.name", branch: 'master', credentialsId: 'github-token'
+                    git url: "${params.GIT_BASE_URL}/${config.name}", branch: 'master', credentialsId: 'github-token'
                 }
             }
             stage('Build') {
