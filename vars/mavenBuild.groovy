@@ -6,7 +6,7 @@ def call(Map config) {
         String branch = 'master'
 
         // Tool configuration
-        String mavenTool = 'Maven 3.9.8'
+        String mavenTool = tool name: 'Maven 3.9.8'
         withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
             try {
                 stage('Checkout') {
@@ -18,7 +18,6 @@ def call(Map config) {
                 }
 
                 stage('Build') {
-                    tools {maven mavenTool}
                     sh 'mvn clean package'
                 }
 
