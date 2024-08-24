@@ -2,6 +2,10 @@ def call(Map config) {
     pipeline {
         agent any
 
+        parameters {
+            string(name: 'GIT_BASE_URL', defaultValue: 'https://github.com/amir-nzl', description: 'Base URL for the Git repository')
+        }
+
         tools {
             maven 'Maven 3.9.8'
         }
@@ -10,9 +14,7 @@ def call(Map config) {
             stage('Checkout') {
                 steps {
                     // Checkout code from GitHub
-                    git url: config.gitUrl,
-                        branch: 'master',
-                        credentialsId: 'github-token'
+                    git url: "${params.GIT_BASE_URL}/config.name", branch: 'master', credentialsId: 'github-token'
                 }
             }
             stage('Build') {
