@@ -1,9 +1,9 @@
 void call(Map config) {
     node {
         // Define and set parameters
-        String gitBaseUrl = 'https://github.com/amir-nzl'
         String gitCredentialsId = 'github-token'
-        String branch = 'master'
+        String mavenSettingRepo = 'https://github.com/amir-nzl/obe-pipelines.git'
+        String mavenSettingRepoBranch = 'master'
 
         // Tool configuration
         String mavenTool = tool name: 'Maven 3.9.8'
@@ -16,7 +16,7 @@ void call(Map config) {
                 }
 
                 stage('Fetch Maven Settings') {
-                        mavenBuildSettings(mavenSettingsfileVersion, gitCreds, mavenSettingRepo, mavenSettingRepoBranch)
+                        mavenBuildSettings(gitCredentialsId, mavenSettingRepo, mavenSettingRepoBranch)
                 }
 
                 stage('Build') {
