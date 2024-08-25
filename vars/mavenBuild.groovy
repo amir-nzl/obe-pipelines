@@ -31,8 +31,7 @@ void call(Map config) {
                     }
 
                     stage('Deploy') {
-                        echo 'Deploying application...'
-                    // Add deployment steps here
+                        sh 'mvn deploy'
                     }
                 } catch (Exception ex) {
                     currentBuild.result = 'FAILURE'
