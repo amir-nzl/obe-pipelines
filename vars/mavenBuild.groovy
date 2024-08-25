@@ -11,11 +11,12 @@ void call(Map config) {
         withEnv(["PATH+MAVEN=${mavenTool}/bin"]) {
             try {
                 stage('Checkout') {
-                    // Checkout code from GitHub
-                    checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: branch]],
-                    userRemoteConfigs: [[url: "${gitBaseUrl}/${config.name}", credentialsId: gitCredentialsId]]])
+                    // check out the source code from the same repository that the Jenkinsfile resides in.
+                    checkout scm
+                }
+
+                stage('Fetch Maven Settings') {
+                        mavenBuildSettings(mavenSettingsfileVersion, gitCreds, mavenSettingRepo, mavenSettingRepoBranch)
                 }
 
                 stage('Build') {
@@ -28,7 +29,7 @@ void call(Map config) {
 
                 stage('Deploy') {
                     echo 'Deploying application...'
-                    // Add deployment steps here
+                // Add deployment steps here
                 }
         } catch (Exception ex) {
                 currentBuild.result = 'FAILURE'
