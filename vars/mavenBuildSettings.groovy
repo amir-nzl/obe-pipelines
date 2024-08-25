@@ -1,9 +1,10 @@
-def call(String creds='github-token', String repository='', String branch='master') {
-    stage('Checkout Settings') {
+void call(String creds='github-token', String repository='', String branch='master') {
+    stage('Fetch Maven Settings') {
         dir('dependency') {
             git(url: repository, branch: branch, credentialsId: creds)
             sh """
-            cp ${env.WORKSPACE}/dependency/settings.xml ${env.WORKSPACE}/settings.xml
+            ls -l
+            cp maven-settings/settings.xml ${env.WORKSPACE}/settings.xml
             """
         }
     }
