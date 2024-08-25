@@ -1,0 +1,12 @@
+<servers>
+    <server>
+      <id>nexus-releases</id>
+      <username>${env.MAVEN_NEXUS_USERNAME}</username>
+      <password>${env.MAVEN_NEXUS_PASSWORD}</password>
+    </server>
+    <server>
+      <id>nexus-snapshots</id>
+      <username>${env.MAVEN_NEXUS_USERNAME}</username>
+      <password>${env.MAVEN_NEXUS_PASSWORD}</password>
+    </server>
+  </servers>
