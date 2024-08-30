@@ -4,6 +4,7 @@ void call(Map config) {
         String gitCredentialsId = 'github-token'
         String mavenSettingRepo = 'https://github.com/amir-nzl/obe-pipelines.git'
         String mavenSettingRepoBranch = 'master'
+        String mavenSettingsFilePath = "${env.WORKSPACE}/settings.xml"
 
         // Tool configuration
         String mavenTool = tool name: 'Maven 3.9.8'
@@ -23,7 +24,7 @@ void call(Map config) {
                     }
 
                     stage('Build') {
-                        sh 'mvn clean package'
+                        sh "mvn clean package -s ${mavenSettingsFilePath}"
                     }
 
                     stage('Test') {
@@ -31,7 +32,7 @@ void call(Map config) {
                     }
 
                     stage('Deploy') {
-                        sh 'mvn deploy'
+                        sh "mvn deploy -Dskiptests -s ${mavenSettingsFilePath}"
                     }
                 } catch (Exception ex) {
                     currentBuild.result = 'FAILURE'
