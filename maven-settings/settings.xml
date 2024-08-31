@@ -1,7 +1,16 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-  
+
+  <mirrors>
+    <mirror>
+      <id>nexus</id>
+      <mirrorOf>external:http:*</mirrorOf>
+      <url>http://mepmphis-nexus:8083/repository/maven-public/</url>
+      <blocked>false</blocked>
+    </mirror>
+  </mirrors>
+
   <servers>
     <server>
       <id>nexus-releases</id>
@@ -15,4 +24,37 @@
     </server>
   </servers>
 
+  <profiles>
+    <profile>
+      <id>default</id>
+      <repositories>
+        <repository>
+          <id>nexus</id>
+          <url>http://mepmphis-nexus:8083/repository/maven-public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>nexus</id>
+          <url>http://mepmphis-nexus:8083/repository/maven-public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>default</activeProfile>
+  </activeProfiles>
 </settings>
