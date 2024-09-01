@@ -24,11 +24,11 @@ void call(Map config) {
                     }
 
                     stage('Build') {
-                        sh "mvn clean verify -s ${mavenSettingsFilePath}"
+                        sh "mvn clean compile -s ${mavenSettingsFilePath}"
                     }
 
                     stage('Test') {
-                        sh 'mvn test'
+                        sh "mvn test -s ${mavenSettingsFilePath}"
                     }
 
                 } catch (Exception ex) {
